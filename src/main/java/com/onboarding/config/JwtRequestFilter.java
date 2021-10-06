@@ -1,4 +1,4 @@
-package com.javainuse.config;
+package com.onboarding.config;
 
 import java.io.IOException;
 
@@ -15,13 +15,14 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.javainuse.service.JwtUserDetailsService;
+import com.onboarding.service.JwtUserDetailsService;
 
 import io.jsonwebtoken.ExpiredJwtException;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
-
+	private String secret;
+	 private static final String BEARER = "Bearer";
 	@Autowired
 	private JwtUserDetailsService jwtUserDetailsService;
 
@@ -38,7 +39,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		String jwtToken = null;
 		// JWT Token is in the form "Bearer token". Remove Bearer word and get
 		// only the Token
-		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
+		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer")) {
 			jwtToken = requestTokenHeader.substring(7);
 			try {
 				username = jwtTokenUtil.getUsernameFromToken(jwtToken);
@@ -48,7 +49,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 				System.out.println("JWT Token has expired");
 			}
 		} else {
-			logger.warn("JWT Token does not begin with Bearer String");
+			logger.warn("Bearer");
 		}
 
 		// Once we get the token validate it.

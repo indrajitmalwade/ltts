@@ -1,4 +1,4 @@
-package com.javainuse.model;
+package com.onboarding.model;
 
 import java.io.Serializable;
 

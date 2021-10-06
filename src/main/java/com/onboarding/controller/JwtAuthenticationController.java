@@ -1,6 +1,4 @@
-package com.javainuse.controller;
-
-import java.util.Objects;
+package com.onboarding.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.javainuse.service.JwtUserDetailsService;
 
+import com.onboarding.config.JwtTokenUtil;
+import com.onboarding.model.JwtRequest;
+import com.onboarding.model.JwtResponse;
+import com.onboarding.service.JwtUserDetailsService;
+ 
 
-import com.javainuse.config.JwtTokenUtil;
-import com.javainuse.model.JwtRequest;
-import com.javainuse.model.JwtResponse;
+ 
 
 @RestController
 @CrossOrigin
@@ -33,6 +33,13 @@ public class JwtAuthenticationController {
 
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
+	
+	
+//	@RequestMapping({"/authenticate"})
+//	public String secondPage() {
+//		return "Success";
+		
+	//}
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
